@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 // import axios from "axios";
 import { useState } from "react";
 
@@ -17,13 +18,33 @@ export default function Login() {
     setPassword(value);
   };
   //handling the submit button
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      
+      const loginCredentials = {
+        emailUser: email,
+        password: password,
+      };
+      //calling the login funciton
+      const login = await axios.post(
+        `https://marketplaceprodigal.herokuapp.com/api/v1/auth/login`,
+        loginCredentials
+      );
+      if (!login) {
+        alert("Invalid email or password");
+      } else {
+        console.log(login);
+        if (login.data.status === true) {
+          // localStorage.setItem("token", login.data.data.token);
+          window.location.href = "/markets";
+        } else {
+          console.log(login.response.data.status);
+          alert("Invalid email or password");
+        }
+      }
     } catch (error) {
       console.log(error);
-    }    
+    }
   };
 
   return (

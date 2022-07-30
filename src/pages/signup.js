@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+// import axios from "axios";
+// import {useState} from "react";
 
 export default function signup() {
+  
   return (
     <>
       <div className="vh-100 d-flex justify-content-center">
