@@ -1,10 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 // import axios from "axios";
 import { useState } from "react";
 
 export default function Login() {
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   //handlinng the email
@@ -35,8 +36,9 @@ export default function Login() {
       } else {
         console.log(login);
         if (login.data.status === true) {
-          // localStorage.setItem("token", login.data.data.token);
-          window.location.href = "/markets";
+          console.log(login.data.token);
+          localStorage.setItem("token", login.data.token);
+          history.push("/markets");
         } else {
           console.log(login.response.data.status);
           alert("Invalid email or password");
