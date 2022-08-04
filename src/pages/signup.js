@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef  } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 // import axios from "axios";
@@ -11,7 +11,6 @@ export default function Signup() {
     emailUser: "",
     password: "",
     confirmPassword: "",
-    checked: false,
   });
   //handling the input field
   const handleInput = (e) => {
@@ -29,10 +28,14 @@ export default function Signup() {
     }
     return false;
   };
+  const [checked, setChecked] = useState(false);
   //submit handler
   const submitHandler = async (e) => {
     e.preventDefault();
-    if (checkPassword()) {
+    if(checked == false){
+      alert("Please Agree to terms and conditions");
+    }
+    else if (checkPassword()) {
       //perform the api call
       try {
         const postSignup = await axios.post(
@@ -55,10 +58,19 @@ export default function Signup() {
         alert(error.message);
         console.log(error.message);
       }
-    } else {
+    } 
+    else {
       alert("Password and confirm password does not match");
     }
   };
+  
+  //checking the agreement
+  const checkAgreement = (e) =>
+  {
+    console.log(checkboxRef.current.checked);
+    setChecked(checkboxRef.current.checked);
+  }
+  const checkboxRef = useRef();
   return (
     <>
       <div className="vh-100 d-flex justify-content-center">
@@ -114,8 +126,9 @@ export default function Signup() {
                 type="checkbox"
                 name="checked"
                 className="custom-control-input"
-                onChange={handleInput}
-                value={loginData.checked}
+                onChange={checkAgreement}
+                ref={checkboxRef}
+                value={checked}
                 id="form-checkbox"
                 required
               />
@@ -134,7 +147,7 @@ export default function Signup() {
           </form>
           <h2>
             Already have an account?
-            <Link href="/"> Sign in here</Link>
+            <Link to="/"> Sign in here</Link>
           </h2>
         </div>
       </div>

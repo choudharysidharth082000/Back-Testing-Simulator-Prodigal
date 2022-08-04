@@ -1,7 +1,9 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
-// import axios from "axios";
+
+//importing the custom components
+import Loader from "../components/assets/Loader"
 import { useState } from "react";
 
 export default function Login() {
@@ -94,6 +96,7 @@ export default function Login() {
               onClick={handleSubmit}
             >
               Sign In
+              {/* <Loader /> */}
             </button>
           </form>
           <h2>
