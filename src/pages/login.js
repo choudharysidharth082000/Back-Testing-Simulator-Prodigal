@@ -3,13 +3,14 @@ import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 
 //importing the custom components
-import Loader from "../components/assets/Loader"
+import Loader from "../components/assets/Loader";
 import { useState } from "react";
 
 export default function Login() {
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loader, setLoader] = useState(true);
   //handlinng the email
   const handleEmail = (e) => {
     const value = e.target.value;
@@ -22,6 +23,7 @@ export default function Login() {
   };
   //handling the submit button
   const handleSubmit = async (e) => {
+    setLoader(true);
     e.preventDefault();
     try {
       const loginCredentials = {
@@ -35,18 +37,22 @@ export default function Login() {
       );
       if (!login) {
         alert("Invalid email or password");
+        // setLoader(false);
       } else {
         console.log(login);
         if (login.data.status === true) {
           console.log(login.data.token);
           localStorage.setItem("token", login.data.token);
+          // setLoader(false);
           history.push("/markets");
         } else {
           console.log(login.response.data.status);
+          // setLoader(false);
           alert("Invalid email or password");
         }
       }
     } catch (error) {
+      // setLoader(false);
       console.log(error);
     }
   };
@@ -95,8 +101,8 @@ export default function Login() {
               className="btn btn-primary"
               onClick={handleSubmit}
             >
-              Sign In
-              {/* <Loader /> */}
+              <div className={`${loader ? "d-none" : "d-block"}`}>Sign In</div>
+                <Loader loading={loader} />
             </button>
           </form>
           <h2>
