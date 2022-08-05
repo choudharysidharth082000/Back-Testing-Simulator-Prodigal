@@ -19,10 +19,10 @@ import Notfound from './notfound';
 export default function index() {
   return (
     <>
-      <Layout>
+      {/* <Layout> */}
         <Switch>
           <Route exact path="/">
-            <Login />
+            <Notfound />
           </Route>
           <Route path="/signup">
             <Signup />
@@ -64,7 +64,7 @@ export default function index() {
             <Notfound />
           </Route>
         </Switch>
-      </Layout>
+      {/* </Layout> */}
     </>
   );
 }
