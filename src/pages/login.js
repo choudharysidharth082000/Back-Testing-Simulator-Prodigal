@@ -30,7 +30,7 @@ export default function Login() {
       };
       //calling the login funciton
       const login = await axios.post(
-        `https://marketplaceprodigal.herokuapp.com/api/v1/auth/login`,
+        `/api/v1/auth/login`,
         loginCredentials
       );
       if (!login) {

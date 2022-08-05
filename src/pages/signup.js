@@ -39,7 +39,7 @@ export default function Signup() {
       //perform the api call
       try {
         const postSignup = await axios.post(
-          "https://marketplaceprodigal.herokuapp.com/api/v1/auth/signup",
+          "/api/v1/auth/signup",
           loginData
         );
         if (!postSignup) {
