@@ -15,14 +15,18 @@ import TermsAndConditions from './terms-and-conditions';
 import NewsDetails from './news-details';
 import Signup from './signup';
 import Notfound from './notfound';
+import ChooseServer from "./ChooseServer"
 
 export default function index() {
   return (
     <>
-      {/* <Layout> */}
+      <Layout>
         <Switch>
           <Route exact path="/">
             <Notfound />
+          </Route>
+          <Route path="/chooseServer">
+            <ChooseServer />
           </Route>
           <Route path="/signup">
             <Signup />
@@ -64,7 +68,7 @@ export default function index() {
             <Notfound />
           </Route>
         </Switch>
-      {/* </Layout> */}
+      </Layout>
     </>
   );
 }
